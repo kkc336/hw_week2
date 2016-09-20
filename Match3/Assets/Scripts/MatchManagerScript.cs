@@ -24,7 +24,11 @@ public class MatchManagerScript : MonoBehaviour {
 				if(x < gameManager.gridWidth - 2){	//GridHasHorizontalMatch checks 2 to the right
 													//gameManager.gridWidth - 2 ensures you're never extending into
 													//a space that doesn't exist
-					match = match || GridHasHorizontalMatch(x, y); //if match was ever set to true, it stays true forever
+					match = match || GridHasHorizontalMatch(x, y) ; //if match was ever set to true, it stays true forever
+				}
+				if(y < gameManager.gridHeight - 2){
+
+					match = match || GridHasVerticalMatch (x, y);
 				}
 			}
 		}
@@ -56,6 +60,40 @@ public class MatchManagerScript : MonoBehaviour {
 			return false;
 		}
 	}
+
+
+
+
+
+	public bool GridHasVerticalMatch(int x, int y){
+	
+		GameObject token1 = gameManager.gridArray[x, y];
+		GameObject token2 = gameManager.gridArray [x, y + 1];
+		GameObject token3 = gameManager.gridArray [x, y + 2];
+	
+		if (token1 != null && token2 != null && token3 != null) {
+
+			SpriteRenderer sr1 = token1.GetComponent<SpriteRenderer> ();
+			SpriteRenderer sr2 = token1.GetComponent<SpriteRenderer> ();
+			SpriteRenderer sr3 = token1.GetComponent<SpriteRenderer> ();
+
+			return (sr1.sprite == sr2.sprite && sr2.sprite == sr3.sprite);
+		} 
+
+		else {
+
+			return false;
+
+		}
+	}
+
+
+
+
+
+
+
+
 
 	/// <summary>
 	/// Determine how far to the right a match extends.
@@ -98,6 +136,59 @@ public class MatchManagerScript : MonoBehaviour {
 
 	//TODO:Make a Vertical line manager?
 
+
+
+	public int GetVerticalMatchLength(int x, int y){
+
+		int matchLength = 1;
+	
+		GameObject first = gameManager.gridArray[x, y];
+	
+	
+		if(first != null){
+
+			SpriteRenderer sr1 = first.GetComponent<SpriteRenderer> ();
+
+			for(int i = y+1; i < gameManager.gridHeight; i++){
+				
+				GameObject other = gameManager.gridArray[x, i];
+
+				if(other != null){
+					SpriteRenderer sr2 = other.GetComponent<SpriteRenderer>();
+
+					if(sr1.sprite == sr2.sprite){
+						matchLength++;
+					} else {
+						break;
+					}
+				} else {
+					break;
+				}
+
+
+
+			}
+		}
+	
+
+	
+		return matchLength;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	/// <summary>
 	/// Destroys all tokens in a match of three or more
 	/// </summary>
@@ -124,6 +215,46 @@ public class MatchManagerScript : MonoBehaviour {
 						}
 					}
 				}
+
+
+
+
+
+
+
+
+				if(y < gameManager.gridHeight - 2){
+
+					int verticalMatchLength = GetVerticalMatchLength(x, y);
+
+					if(verticalMatchLength > 2){
+
+						for(int i = y; i < y + verticalMatchLength; i++){
+							GameObject token = gameManager.gridArray[x, i]; 
+							Destroy(token);
+
+							gameManager.gridArray[x, i] = null;
+							numRemoved++;
+						}
+					}
+				}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			}
 		}
 		
