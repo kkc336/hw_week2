@@ -14,9 +14,10 @@ public class InputManagerScript : MonoBehaviour {
 	public virtual void Start () {
 		moveManager = GetComponent<MoveTokensScript>();
 		gameManager = GetComponent<GameManagerScript>();
-	}
+	} 
 		
 	public virtual void SelectToken(){
+	//	print ("using selectToken");
 		if(Input.GetMouseButtonDown(0)){
 			//when you click, check where on the screen you're clicking
 			Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -25,17 +26,23 @@ public class InputManagerScript : MonoBehaviour {
 
 			if(collider != null){
 				//if you click on something...
+			//	print("click");
+
 				if(selected == null){
 					//if we haven't yet selected a token, select this token and remember it
-					selected = collider.gameObject;				
+					selected = collider.gameObject;		
+				//	print ("select a token and remember");
 				} else {
 					//if we HAVE already selected a token, calculate the distance between this token (which we're currently clicking on)
 					//and that one (which we clicked on last time)
 					Vector2 pos1 = gameManager.GetPositionOfTokenInGrid(selected);
 					Vector2 pos2 = gameManager.GetPositionOfTokenInGrid(collider.gameObject);
+				//	print ("pos1 selected when else");
+					//print ("pos2 collidered when else");
 
 					//if they're next to each other, swap them
 					if(Mathf.Abs((pos1.x - pos2.x) + (pos1.y - pos2.y)) == 1){
+					//	print ("action");
 						moveManager.SetupTokenExchange(selected, pos1, collider.gameObject, pos2, true);
 					}
 					//then deselect our current token (because we're about to destroy or forget it)

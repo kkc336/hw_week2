@@ -20,14 +20,19 @@ public class GameManagerScript : MonoBehaviour {
 
 	protected Object[] tokenTypes;
 
+
+	/*
 	//TODO: use this variable. It doesn't seem to be used anywhere.
 	GameObject selected;
+	*/
 
 	public virtual void Start () {
 		//load the tokens, make the grid, and create references to the other scripts
 		tokenTypes = (Object[])Resources.LoadAll("Tokens/");
+
 		gridArray = new GameObject[gridWidth, gridHeight];
 		MakeGrid();
+
 		matchManager = GetComponent<MatchManagerScript>();
 		inputManager = GetComponent<InputManagerScript>();
 		repopulateManager = GetComponent<RepopulateScript>();
@@ -40,13 +45,19 @@ public class GameManagerScript : MonoBehaviour {
 		if(!GridHasEmpty()){
 			//if the grid is full of tokens and has matches, remove them.
 			if(matchManager.GridHasMatch()){
+				//maybe grid has match have error
 				matchManager.RemoveMatches();
+			//	print ("if");
 			} else {
 				//if the grid is full and there are no matches, wait for the player to make a move (and look for it in InputManager)
+				//print ("else");
 				inputManager.SelectToken();
 			}
 
-		} else {
+		} 
+
+
+		else {
 			if(!moveTokenManager.move){
 				//if the icons are currently moving, set them up to move and leave it be
 				moveTokenManager.SetupTokenMove();
@@ -74,6 +85,10 @@ public class GameManagerScript : MonoBehaviour {
 			}
 		}
 	}
+
+
+
+
 
 	//checks whether there is an empty space in the grid
 	public virtual bool GridHasEmpty(){
@@ -120,6 +135,10 @@ public class GameManagerScript : MonoBehaviour {
 			(x - gridWidth/2) * tokenSize,
 			(y - gridHeight/2) * tokenSize);
 	}
+
+
+
+
 
 
 	/// <summary>

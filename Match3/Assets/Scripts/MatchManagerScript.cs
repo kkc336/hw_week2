@@ -18,21 +18,25 @@ public class MatchManagerScript : MonoBehaviour {
 	public virtual bool GridHasMatch(){
 		bool match = false; //assume there is no match
 
+
 		//check each square in the grid
 		for(int x = 0; x < gameManager.gridWidth; x++){
 			for(int y = 0; y < gameManager.gridHeight ; y++){
-				if(x < gameManager.gridWidth - 2){	//GridHasHorizontalMatch checks 2 to the right
-													//gameManager.gridWidth - 2 ensures you're never extending into
-													//a space that doesn't exist
-					match = match || GridHasHorizontalMatch(x, y) ; //if match was ever set to true, it stays true forever
-				}
-				if(y < gameManager.gridHeight - 2){
+				if (x < gameManager.gridWidth - 2) {	//GridHasHorizontalMatch checks 2 to the right
+					//gameManager.gridWidth - 2 ensures you're never extending into
+					//a space that doesn't exist
+					match = match || GridHasHorizontalMatch (x, y); //if match was ever set to true, it stays true forever
+				} 
+
+				if (y < gameManager.gridHeight - 2) {
 
 					match = match || GridHasVerticalMatch (x, y);
-				}
+				} 
+	
 			}
 		}
-
+		print ("bool match is " + match);
+		//it seems match should return false so as to activate input manager
 		return match;
 	}
 
@@ -74,8 +78,8 @@ public class MatchManagerScript : MonoBehaviour {
 		if (token1 != null && token2 != null && token3 != null) {
 
 			SpriteRenderer sr1 = token1.GetComponent<SpriteRenderer> ();
-			SpriteRenderer sr2 = token1.GetComponent<SpriteRenderer> ();
-			SpriteRenderer sr3 = token1.GetComponent<SpriteRenderer> ();
+			SpriteRenderer sr2 = token2.GetComponent<SpriteRenderer> ();
+			SpriteRenderer sr3 = token3.GetComponent<SpriteRenderer> ();
 
 			return (sr1.sprite == sr2.sprite && sr2.sprite == sr3.sprite);
 		} 
