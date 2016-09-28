@@ -45,6 +45,12 @@ public class GameManagerScript : MonoBehaviour {
 		if(!GridHasEmpty()){
 			//if the grid is full of tokens and has matches, remove them.
 			if(matchManager.GridHasMatch()){
+				//create display
+				LineManager.lineManagerScript.isRendered = true;
+				//find position
+				//find chained number
+
+				print ("------------------" + matchManager.RemoveMatches());
 				//maybe grid has match have error
 				matchManager.RemoveMatches();
 
@@ -52,7 +58,8 @@ public class GameManagerScript : MonoBehaviour {
 			} else {
 				//if the grid is full and there are no matches, wait for the player to make a move (and look for it in InputManager)
 				//print ("else");
-
+				//turn off display
+				LineManager.lineManagerScript.isRendered = false;
 				inputManager.SelectToken();
 			}
 

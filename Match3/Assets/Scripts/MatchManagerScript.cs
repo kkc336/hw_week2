@@ -64,15 +64,13 @@ public class MatchManagerScript : MonoBehaviour {
 		GameObject token2 = gameManager.gridArray[x + 1, y];
 		GameObject token3 = gameManager.gridArray[x + 2, y];
 
-		//LineManager.lineManagerScript.SetPoints (token1.transform.position, new Vector3(1, 0, 0));
-
 
 		if(token1 != null && token2 != null && token3 != null){ //ensure all of the token exists
 			SpriteRenderer sr1 = token1.GetComponent<SpriteRenderer>();
 			SpriteRenderer sr2 = token2.GetComponent<SpriteRenderer>();
 			SpriteRenderer sr3 = token3.GetComponent<SpriteRenderer>();
 
-
+			LineManager.lineManagerScript.SetPoints (token1.transform.position, new Vector3(1,0,0));
 
 			return (sr1.sprite == sr2.sprite && sr2.sprite == sr3.sprite);  //compare their sprites
 																			//to see if they're the same
@@ -92,8 +90,6 @@ public class MatchManagerScript : MonoBehaviour {
 		GameObject token3 = gameManager.gridArray [x, y + 2];
 
 
-		//LineManager.lineManagerScript.SetPoints (token1.transform.position, new Vector3(0, 1, 0));
-
 	
 		if (token1 != null && token2 != null && token3 != null) {
 
@@ -101,7 +97,7 @@ public class MatchManagerScript : MonoBehaviour {
 			SpriteRenderer sr2 = token2.GetComponent<SpriteRenderer> ();
 			SpriteRenderer sr3 = token3.GetComponent<SpriteRenderer> ();
 
-
+			LineManager.lineManagerScript.SetPoints (token1.transform.position, new Vector3(0,1,0));
 
 			return (sr1.sprite == sr2.sprite && sr2.sprite == sr3.sprite);
 		} 
