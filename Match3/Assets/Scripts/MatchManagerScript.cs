@@ -7,6 +7,9 @@ public class MatchManagerScript : MonoBehaviour {
 												//but not to unrelated scripts
 	public static MatchManagerScript matchManager;
 
+	public int vNum;
+	public int hNum;
+
 
 	void Awake(){
 
@@ -124,7 +127,7 @@ public class MatchManagerScript : MonoBehaviour {
 	/// <param name="x">The x coordinate of the leftmost gameobject in the match.</param>
 	/// <param name="y">The y coordinate of the leftmost gameobject in the match.</param>
 	public int GetHorizontalMatchLength(int x, int y){
-		int matchLength = 1;
+		 int matchLength = 1;
 		
 		GameObject first = gameManager.gridArray[x, y]; //get the gameobject at the provided coordinates
 
@@ -216,7 +219,7 @@ public class MatchManagerScript : MonoBehaviour {
 	/// </summary>
 	/// <returns>The number of tokens destroyed.</returns>
 	public virtual int RemoveMatches(){
-		int numRemoved = 0;
+		 int numRemoved = 0;
 
 		//iterate across entire grid, looking for matches
 		//wherever a horizontal match of three or more tokens is found, destroy them
@@ -227,6 +230,10 @@ public class MatchManagerScript : MonoBehaviour {
 					int horizonMatchLength = GetHorizontalMatchLength(x, y);
 
 					if(horizonMatchLength > 2){
+						
+						print ("============" + horizonMatchLength);
+						hNum = horizonMatchLength;
+						vNum = 0;
 
 						for(int i = x; i < x + horizonMatchLength; i++){
 							GameObject token = gameManager.gridArray[i, y]; 
@@ -253,6 +260,10 @@ public class MatchManagerScript : MonoBehaviour {
 					int verticalMatchLength = GetVerticalMatchLength(x, y);
 
 					if(verticalMatchLength > 2){
+						
+						print ("============" + verticalMatchLength);
+						vNum = verticalMatchLength;
+						hNum = 0;
 
 						for(int i = y; i < y + verticalMatchLength; i++){
 							GameObject token = gameManager.gridArray[x, i]; 

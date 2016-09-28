@@ -41,9 +41,21 @@ public class LineManager : MonoBehaviour {
 		
 
 		if (isRendered == true) {
-			for(int i = 0; i < 3; i++){
-			pointTracker[i].GetComponent<Renderer>().enabled = true;
+			//find num
+			bool numChack;
+
+			if (MatchManagerScript.matchManager.vNum > MatchManagerScript.matchManager.hNum) {
+				for(int i = 0; i < MatchManagerScript.matchManager.vNum; i++){
+					pointTracker[i].GetComponent<Renderer>().enabled = true;
+				}
+
+			} else {
+				for(int i = 0; i < MatchManagerScript.matchManager.hNum; i++){
+					pointTracker[i].GetComponent<Renderer>().enabled = true;
+				}
 			}
+
+		
 		} 
 
 		else {
@@ -62,7 +74,7 @@ public class LineManager : MonoBehaviour {
 		for(int i = 0; i < total; i++){
 
 			//if (i < 3) {
-				pointTracker [i].transform.position = startPos;
+			pointTracker [i].transform.position = startPos + new Vector3(0,0,-1);
 				startPos = startPos + add;
 
 
