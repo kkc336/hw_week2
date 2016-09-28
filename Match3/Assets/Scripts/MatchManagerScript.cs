@@ -5,6 +5,16 @@ public class MatchManagerScript : MonoBehaviour {
 
 	protected GameManagerScript gameManager;    //"protected" means this field is public to child scripts
 												//but not to unrelated scripts
+	public static MatchManagerScript matchManager;
+
+
+	void Awake(){
+
+		matchManager = this;
+
+	}
+
+
 
 	public virtual void Start () {
 		gameManager = GetComponent<GameManagerScript>();
@@ -26,17 +36,18 @@ public class MatchManagerScript : MonoBehaviour {
 					//gameManager.gridWidth - 2 ensures you're never extending into
 					//a space that doesn't exist
 					match = match || GridHasHorizontalMatch (x, y); //if match was ever set to true, it stays true forever
+
 				} 
 
 				if (y < gameManager.gridHeight - 2) {
 
 					match = match || GridHasVerticalMatch (x, y);
+
 				} 
 	
 			}
 		}
-		print ("bool match is " + match);
-		//it seems match should return false so as to activate input manager
+			
 		return match;
 	}
 
@@ -53,11 +64,16 @@ public class MatchManagerScript : MonoBehaviour {
 		GameObject token2 = gameManager.gridArray[x + 1, y];
 		GameObject token3 = gameManager.gridArray[x + 2, y];
 
+		//LineManager.lineManagerScript.SetPoints (token1.transform.position, new Vector3(1, 0, 0));
+
+
 		if(token1 != null && token2 != null && token3 != null){ //ensure all of the token exists
 			SpriteRenderer sr1 = token1.GetComponent<SpriteRenderer>();
 			SpriteRenderer sr2 = token2.GetComponent<SpriteRenderer>();
 			SpriteRenderer sr3 = token3.GetComponent<SpriteRenderer>();
-			
+
+
+
 			return (sr1.sprite == sr2.sprite && sr2.sprite == sr3.sprite);  //compare their sprites
 																			//to see if they're the same
 		} else {
@@ -74,12 +90,18 @@ public class MatchManagerScript : MonoBehaviour {
 		GameObject token1 = gameManager.gridArray[x, y];
 		GameObject token2 = gameManager.gridArray [x, y + 1];
 		GameObject token3 = gameManager.gridArray [x, y + 2];
+
+
+		//LineManager.lineManagerScript.SetPoints (token1.transform.position, new Vector3(0, 1, 0));
+
 	
 		if (token1 != null && token2 != null && token3 != null) {
 
 			SpriteRenderer sr1 = token1.GetComponent<SpriteRenderer> ();
 			SpriteRenderer sr2 = token2.GetComponent<SpriteRenderer> ();
 			SpriteRenderer sr3 = token3.GetComponent<SpriteRenderer> ();
+
+
 
 			return (sr1.sprite == sr2.sprite && sr2.sprite == sr3.sprite);
 		} 
@@ -214,6 +236,9 @@ public class MatchManagerScript : MonoBehaviour {
 							GameObject token = gameManager.gridArray[i, y]; 
 							Destroy(token);
 
+							ScoreManager.scoreManager.score += 6;
+
+
 							gameManager.gridArray[i, y] = null;
 							numRemoved++;
 						}
@@ -237,6 +262,9 @@ public class MatchManagerScript : MonoBehaviour {
 							GameObject token = gameManager.gridArray[x, i]; 
 							Destroy(token);
 
+							ScoreManager.scoreManager.score += 6;
+
+
 							gameManager.gridArray[x, i] = null;
 							numRemoved++;
 						}
@@ -246,11 +274,7 @@ public class MatchManagerScript : MonoBehaviour {
 
 
 
-
-
-
-
-
+		
 
 
 

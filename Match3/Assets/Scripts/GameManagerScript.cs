@@ -47,10 +47,12 @@ public class GameManagerScript : MonoBehaviour {
 			if(matchManager.GridHasMatch()){
 				//maybe grid has match have error
 				matchManager.RemoveMatches();
+
 			//	print ("if");
 			} else {
 				//if the grid is full and there are no matches, wait for the player to make a move (and look for it in InputManager)
 				//print ("else");
+
 				inputManager.SelectToken();
 			}
 

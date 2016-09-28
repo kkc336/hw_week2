@@ -41,7 +41,7 @@ public class InputManagerScript : MonoBehaviour {
 					//print ("pos2 collidered when else");
 
 					//if they're next to each other, swap them
-					if(Mathf.Abs((pos1.x - pos2.x) + (pos1.y - pos2.y)) == 1){
+					if(Mathf.Abs(pos1.x - pos2.x) + Mathf.Abs(pos1.y - pos2.y) == 1){
 					//	print ("action");
 						moveManager.SetupTokenExchange(selected, pos1, collider.gameObject, pos2, true);
 					}
