@@ -39,8 +39,9 @@ public class LineManager : MonoBehaviour {
 
 	void Update(){
 		
+
 		if (isRendered == true) {
-			for(int i = 0; i <3; i++){
+			for(int i = 0; i < 3; i++){
 			pointTracker[i].GetComponent<Renderer>().enabled = true;
 			}
 		} 
@@ -60,12 +61,12 @@ public class LineManager : MonoBehaviour {
 
 		for(int i = 0; i < total; i++){
 
-			if (i < 3) {
+			//if (i < 3) {
 				pointTracker [i].transform.position = startPos;
 				startPos = startPos + add;
 
 
-			} 
+		//	} 
 		}
 
 

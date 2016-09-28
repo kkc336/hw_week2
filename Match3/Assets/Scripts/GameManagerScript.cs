@@ -47,10 +47,7 @@ public class GameManagerScript : MonoBehaviour {
 			if(matchManager.GridHasMatch()){
 				//create display
 				LineManager.lineManagerScript.isRendered = true;
-				//find position
-				//find chained number
 
-				print ("------------------" + matchManager.RemoveMatches());
 				//maybe grid has match have error
 				matchManager.RemoveMatches();
 
